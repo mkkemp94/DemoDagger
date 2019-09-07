@@ -3,6 +3,11 @@ package com.example.demodagger;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.demodagger.car.Car;
+import com.example.demodagger.car.TestCarObject;
+import com.example.demodagger.dagger.CarComponent;
+import com.example.demodagger.dagger.DaggerCarComponent;
+
 import javax.inject.Inject;
 
 import androidx.appcompat.app.AppCompatActivity;

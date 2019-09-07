@@ -1,4 +1,8 @@
-package com.example.demodagger;
+package com.example.demodagger.dagger;
+
+import com.example.demodagger.car.Rims;
+import com.example.demodagger.car.Tires;
+import com.example.demodagger.car.Wheels;
 
 import dagger.Module;
 import dagger.Provides;

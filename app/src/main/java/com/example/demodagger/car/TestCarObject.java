@@ -1,10 +1,10 @@
-package com.example.demodagger;
+package com.example.demodagger.car;
 
 import android.util.Log;
 
 import javax.inject.Inject;
 
-class TestCarObject {
+public class TestCarObject {
 
     private static final String TAG = "TestCarObject";
 
@@ -15,7 +15,7 @@ class TestCarObject {
     // I can also make the constructor injectable and then  inject fields...
     // But this seems like bad practice too because I'm creating a new car out of thin air
     @Inject
-    Car car3;
+    public Car car3;
 
     @Inject
     public TestCarObject() {

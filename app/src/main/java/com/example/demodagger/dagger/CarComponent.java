@@ -1,4 +1,8 @@
-package com.example.demodagger;
+package com.example.demodagger.dagger;
+
+import com.example.demodagger.MainActivity;
+import com.example.demodagger.car.Car;
+import com.example.demodagger.car.TestCarObject;
 
 import dagger.Component;
 
