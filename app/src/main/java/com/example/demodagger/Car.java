@@ -33,6 +33,7 @@ public class Car {
     }
 
     public void drive() {
+        mEngine.start();
         Log.d(TAG, "Driving...");
     }
 }
