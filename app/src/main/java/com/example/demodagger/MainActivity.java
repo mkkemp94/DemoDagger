@@ -35,9 +35,8 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: third car field");
         mCar3.drive();
 
-        TestCarObjectFieldInjection testCarObjectFieldInjection = new TestCarObjectFieldInjection(component);
+        TestCarObjectFieldInjection testCarObjectFieldInjection = component.getTestCarObjectFieldInjection();
         testCarObjectFieldInjection.driveFieldCar();
-        testCarObjectFieldInjection.createCarAndDrive();
 
         // Constructor injection
         Log.d(TAG, "onCreate: Car created by component directly");
