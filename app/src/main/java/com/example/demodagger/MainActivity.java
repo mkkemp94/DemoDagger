@@ -23,24 +23,26 @@ public class MainActivity extends AppCompatActivity {
 
         CarComponent component = DaggerCarComponent.create();
 
-        // Populate my fields for me
+        // Field injection
         component.inject(this);
 
-        Log.d(TAG, "onCreate: first car field");
+        Log.d(TAG, "onCreate: First car already created using field injection.");
         mCar.drive();
 
-        Log.d(TAG, "onCreate: second car field");
+        Log.d(TAG, "onCreate: Second car already created using field injection.");
         mCar2.drive();
 
-        Log.d(TAG, "onCreate: third car field");
+        Log.d(TAG, "onCreate: Third car already created using field injection.");
         mCar3.drive();
 
-        TestCarObjectFieldInjection testCarObjectFieldInjection = component.getTestCarObjectFieldInjection();
-        testCarObjectFieldInjection.driveFieldCar();
-
         // Constructor injection
-        Log.d(TAG, "onCreate: Car created by component directly");
+        Log.d(TAG, "onCreate: Creating car by asking component to create it.");
         Car createdCar = component.createCar();
         createdCar.drive();
+
+        // Custom
+        Log.d(TAG, "onCreate: Creating car by asking component to create custom object.");
+        TestCarObject testCarObject = component.createTestCarObject();
+        testCarObject.driveFieldCar();
     }
 }
