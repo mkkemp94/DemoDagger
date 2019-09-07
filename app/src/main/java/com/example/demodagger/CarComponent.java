@@ -21,5 +21,10 @@ import dagger.Component;
 @Component
 public interface CarComponent {
 
-    Car fetchCar(); // Provision
+    // Create a car object
+    Car createCar();
+
+    // Here's my object, please fill out its fields
+    void inject(MainActivity mainActivity);
+    void inject(TestCarObjectFieldInjection testCarObjectObjectFieldInjection);
 }
