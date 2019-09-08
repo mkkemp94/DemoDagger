@@ -1,12 +1,11 @@
 package com.example.demodagger.car;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import com.example.demodagger.dagger.AppScope;
 
-@Singleton
+/**
+ * Lives as long as the application is alive.
+ */
+@AppScope
 public class Driver {
-    
-    @Inject
-    public Driver() {
-    }
+    // We don't own this class, so we can't annotate it with @Inject.
 }

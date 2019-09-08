@@ -2,9 +2,17 @@ package com.example.demodagger.car;
 
 import android.util.Log;
 
+import com.example.demodagger.dagger.ActivityScope;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
+/**
+ * Lives as long as the activity is alive.
+ *
+ * Constructor is injected with @Inject to put this scope at the top.
+ */
+@ActivityScope
 public class Car {
 
     private static final String TAG = "Car";

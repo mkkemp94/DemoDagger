@@ -1,9 +1,9 @@
 package com.example.demodagger.dagger;
 
 import com.example.demodagger.MainActivity;
+import com.example.demodagger.car.Car;
 
 import javax.inject.Named;
-import javax.inject.Singleton;
 
 import dagger.BindsInstance;
 import dagger.Component;
@@ -28,8 +28,8 @@ import dagger.Component;
  * so that it knows where to get objects it needs from.
  */
 
-@Singleton
-@Component(modules = {
+@ActivityScope
+@Component(dependencies = AppComponent.class, modules = {
         WheelsModule.class,
         
         // Can't use both or Dagger won't know which engine to use
@@ -37,16 +37,15 @@ import dagger.Component;
         //                DieselEngineModule.class // Swap modules to easily test app
     
 })
-public interface CarComponent {
+public interface ActivityComponent {
     
-    // // Create a car object
-    // Car createCar();
-    //
-    // TestCarObject createTestCarObject();
+    // Create a car object
+    Car createCar();
     
     // Here's my object, please fill out its fields
     void inject(MainActivity mainActivity);
     
+    // TestCarObject createTestCarObject();
     // void inject(TestCarObject testCarObjectObjectFieldInjection);
     
     /**
@@ -84,7 +83,10 @@ public interface CarComponent {
         @BindsInstance
         Builder carCost(@Named("car cost") int carCost);
         
+        // Would be generated automatically if the Builder wasn't custom.
+        Builder appComponent(AppComponent component);
+        
         // Dagger will implement this method.
-        CarComponent build();
+        ActivityComponent build();
     }
 }
