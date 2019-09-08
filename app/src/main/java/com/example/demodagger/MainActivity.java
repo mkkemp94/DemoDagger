@@ -4,9 +4,9 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.demodagger.car.Car;
-import com.example.demodagger.car.TestCarObject;
 import com.example.demodagger.dagger.CarComponent;
 import com.example.demodagger.dagger.DaggerCarComponent;
+import com.example.demodagger.dagger.DieselEngineModule;
 
 import javax.inject.Inject;
 
@@ -28,9 +28,10 @@ public class MainActivity extends AppCompatActivity {
         
         CarComponent component = DaggerCarComponent
                 .builder()
-                .horsePower(150)
-                .engineCapacity(1300)
-                //                .dieselEngineModule(new DieselEngineModule(100))
+                //                .horsePower(150)
+                //                .engineCapacity(1300)
+                // Diesel Engine Module is created by me and I pass it to Dagger
+                .dieselEngineModule(new DieselEngineModule(100, 1400, 50000))
                 .build();
         
         // Field injection
@@ -45,14 +46,14 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: Third car already created using field injection.");
         mCar3.drive();
         
-        // Constructor injection
-        Log.d(TAG, "onCreate: Creating car by asking component to create it.");
-        Car createdCar = component.createCar();
-        createdCar.drive();
+//        // Constructor injection
+//        Log.d(TAG, "onCreate: Creating car by asking component to create it.");
+//        Car createdCar = component.createCar();
+//        createdCar.drive();
         
-        // Custom
-        Log.d(TAG, "onCreate: Creating car by asking component to create custom object.");
-        TestCarObject testCarObject = component.createTestCarObject();
-        testCarObject.driveFieldCar();
+//        // Custom
+//        Log.d(TAG, "onCreate: Creating car by asking component to create custom object.");
+//        TestCarObject testCarObject = component.createTestCarObject();
+//        testCarObject.driveFieldCar();
     }
 }

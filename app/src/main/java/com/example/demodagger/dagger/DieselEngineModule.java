@@ -3,6 +3,8 @@ package com.example.demodagger.dagger;
 import com.example.demodagger.car.DieselEngine;
 import com.example.demodagger.car.Engine;
 
+import javax.inject.Named;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -23,9 +25,13 @@ public class DieselEngineModule {
      * See PetrolEngineModule.java later
      */
     private int mHorsepower;
+    private int mEngineCapacity;
+    private int mCost;
     
-    public DieselEngineModule(int horsepower) {
-        mHorsepower = horsepower;
+    public DieselEngineModule(int horsePower, int engineCapacity, int cost) {
+        mHorsepower = horsePower;
+        mEngineCapacity = engineCapacity;
+        mCost = cost;
     }
     
     /**
@@ -35,8 +41,21 @@ public class DieselEngineModule {
      * so we can use them independently of each other...
      */
     @Provides
+    @Named("horse power")
     int provideHorsePower() {
         return mHorsepower;
+    }
+    
+    @Provides
+    @Named("engine capacity")
+    int provideEngineCapacity() {
+        return mEngineCapacity;
+    }
+    
+    @Provides
+    @Named("cost")
+    int provideCost() {
+        return mCost;
     }
     
     @Provides
