@@ -9,8 +9,9 @@ public class Car {
 
     private static final String TAG = "Car";
 
-    Engine mEngine;
-    Wheels mWheels;
+    private Driver mDriver;
+    private Engine mEngine;
+    private Wheels mWheels;
     private int mCarCost;
 
     /**
@@ -21,7 +22,8 @@ public class Car {
      * Probably don't combine all three in a real app.
      */
     @Inject
-    public Car(Engine engine, Wheels wheels, @Named("car cost") int carCost) {
+    public Car(Driver driver, Engine engine, Wheels wheels, @Named("car cost") int carCost) {
+        mDriver = driver;
         mEngine = engine;
         mWheels = wheels;
         mCarCost = carCost;
@@ -38,5 +40,6 @@ public class Car {
     public void drive() {
         mEngine.start();
         Log.d(TAG, "Driving a car... Cost: " + mCarCost);
+        Log.d(TAG, mDriver + " drives " + this);
     }
 }

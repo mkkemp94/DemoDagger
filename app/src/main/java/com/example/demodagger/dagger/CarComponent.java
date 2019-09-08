@@ -3,6 +3,7 @@ package com.example.demodagger.dagger;
 import com.example.demodagger.MainActivity;
 
 import javax.inject.Named;
+import javax.inject.Singleton;
 
 import dagger.BindsInstance;
 import dagger.Component;
@@ -27,6 +28,7 @@ import dagger.Component;
  * so that it knows where to get objects it needs from.
  */
 
+@Singleton
 @Component(modules = {
         WheelsModule.class,
         
