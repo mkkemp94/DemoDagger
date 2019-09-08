@@ -32,7 +32,7 @@ import dagger.Component;
         
         // Can't use both or Dagger won't know which engine to use
         PetrolEngineModule.class,
-//                DieselEngineModule.class // Swap modules to easily test app
+        //                DieselEngineModule.class // Swap modules to easily test app
     
 })
 public interface CarComponent {
@@ -53,7 +53,7 @@ public interface CarComponent {
      */
     @Component.Builder
     interface Builder {
-
+        
         /**
          * Allows method chain call for horsepower on the builder.
          * <p>
@@ -72,13 +72,16 @@ public interface CarComponent {
         @BindsInstance
         // get variables into dependency graph at runtime
         Builder horsePower(@Named("horse power") int horsePower);
-
+        
         @BindsInstance
         Builder engineCapacity(@Named("engine capacity") int engineCapacity);
-    
+        
         @BindsInstance
         Builder cost(@Named("cost") int cost);
-
+        
+        @BindsInstance
+        Builder carCost(@Named("car cost") int carCost);
+        
         // Dagger will implement this method.
         CarComponent build();
     }

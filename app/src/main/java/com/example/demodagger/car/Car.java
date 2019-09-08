@@ -3,6 +3,7 @@ package com.example.demodagger.car;
 import android.util.Log;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 public class Car {
 
@@ -10,6 +11,7 @@ public class Car {
 
     Engine mEngine;
     Wheels mWheels;
+    private int mCarCost;
 
     /**
      * Dagger first calls constructor,
@@ -19,9 +21,10 @@ public class Car {
      * Probably don't combine all three in a real app.
      */
     @Inject
-    public Car(Engine engine, Wheels wheels) {
+    public Car(Engine engine, Wheels wheels, @Named("car cost") int carCost) {
         mEngine = engine;
         mWheels = wheels;
+        mCarCost = carCost;
     }
 
     /**
@@ -34,6 +37,6 @@ public class Car {
 
     public void drive() {
         mEngine.start();
-        Log.d(TAG, "Driving...");
+        Log.d(TAG, "Driving a car... Cost: " + mCarCost);
     }
 }

@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
                 .horsePower(150)
                 .engineCapacity(1300)
                 .cost(17000)
+                .carCost(18350)
                 // Diesel Engine Module is created by me and I pass it to Dagger
                 //                .dieselEngineModule(new DieselEngineModule(100, 1400, 50000))
                 .build();
