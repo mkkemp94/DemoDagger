@@ -30,8 +30,8 @@ import dagger.Component;
         WheelsModule.class,
 
         // Can't use both or Dagger won't know which engine to use
-        PetrolEngineModule.class,
-//        DieselEngineModule.class // Swap modules to easily test app
+//        PetrolEngineModule.class,
+        DieselEngineModule.class // Swap modules to easily test app
 
 })
 public interface CarComponent {

@@ -16,8 +16,11 @@ import dagger.Provides;
  */
 
 @Module
-public class WheelsModule {
+public abstract class WheelsModule {
 
+    // If all provides methods are static, this class can be abstract.
+    // That way we don't create an instance of it in Dagger
+    
     /**
      * If the provider methods don't depend on an instance state of the module,
      * they can be marked as static.

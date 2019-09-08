@@ -3,11 +3,24 @@ package com.example.demodagger.dagger;
 import com.example.demodagger.car.DieselEngine;
 import com.example.demodagger.car.Engine;
 
-import dagger.Binds;
 import dagger.Module;
+import dagger.Provides;
 
 @Module
-public abstract class DieselEngineModule {
+public class DieselEngineModule {
+
+    // Can also create a provides method for horsepower,
+    // but this is only necessary if we want to use this in other places as well
+    private int mHorsepower;
+
+    public DieselEngineModule(int horsepower) {
+        mHorsepower = horsepower;
+    }
+
+    @Provides
+    Engine provideEngine() {
+        return new DieselEngine(mHorsepower);
+    }
 
     /**
      * Better performance and more concise.
@@ -17,13 +30,6 @@ public abstract class DieselEngineModule {
      * @return a new DieselEngine
      */
 
-    @Binds
-    abstract Engine bindEngine(DieselEngine engine);
-
-    // or
-
-    //    @Provides
-    //    static Engine provideEngine() {
-    //        return new DieselEngine();
-    //    }
+    //    @Binds // doesn't support configuration
+    //    abstract Engine bindEngine(DieselEngine engine);
 }

@@ -7,6 +7,7 @@ import com.example.demodagger.car.Car;
 import com.example.demodagger.car.TestCarObject;
 import com.example.demodagger.dagger.CarComponent;
 import com.example.demodagger.dagger.DaggerCarComponent;
+import com.example.demodagger.dagger.DieselEngineModule;
 
 import javax.inject.Inject;
 
@@ -26,7 +27,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        CarComponent component = DaggerCarComponent.create();
+        CarComponent component = DaggerCarComponent
+                .builder()
+                .dieselEngineModule(new DieselEngineModule(100))
+                .build();
 
         // Field injection
         component.inject(this);
