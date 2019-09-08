@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.example.demodagger.car.Car;
 import com.example.demodagger.dagger.CarComponent;
-import com.example.demodagger.dagger.DaggerCarComponent;
 
 import javax.inject.Inject;
 
@@ -25,15 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        CarComponent component = DaggerCarComponent
-                .builder()
-                .horsePower(150)
-                .engineCapacity(1300)
-                .cost(17000)
-                .carCost(18350)
-                // Diesel Engine Module is created by me and I pass it to Dagger
-                //                .dieselEngineModule(new DieselEngineModule(100, 1400, 50000))
-                .build();
+        CarComponent component = ((ExampleApp) getApplication()).getAppComponent();
         
         // Field injection
         component.inject(this);
