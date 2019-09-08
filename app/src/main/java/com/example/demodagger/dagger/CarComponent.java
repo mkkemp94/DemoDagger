@@ -4,6 +4,9 @@ import com.example.demodagger.MainActivity;
 import com.example.demodagger.car.Car;
 import com.example.demodagger.car.TestCarObject;
 
+import javax.inject.Named;
+
+import dagger.BindsInstance;
 import dagger.Component;
 
 /**
@@ -15,8 +18,8 @@ import dagger.Component;
  * Dependency Graph: ... Directed Acyclic Graph ... DAG
  * <p>
  * Block Cylinder Spark Plugs    Tires         Rims
- *     ^      Engine     ^          ^   Wheels  ^
- *                ^         Car          ^
+ * ^      Engine     ^          ^   Wheels  ^
+ * ^         Car          ^
  * <p>
  * At compile time Dagger will implement this interface
  * and create all the necessary code.
@@ -28,21 +31,54 @@ import dagger.Component;
 
 @Component(modules = {
         WheelsModule.class,
-
+        
         // Can't use both or Dagger won't know which engine to use
-//        PetrolEngineModule.class,
-        DieselEngineModule.class // Swap modules to easily test app
-
+        PetrolEngineModule.class,
+        //        DieselEngineModule.class // Swap modules to easily test app
+    
 })
 public interface CarComponent {
-
+    
     // Create a car object
     Car createCar();
-
+    
     TestCarObject createTestCarObject();
-
+    
     // Here's my object, please fill out its fields
     void inject(MainActivity mainActivity);
-
+    
     void inject(TestCarObject testCarObjectObjectFieldInjection);
+    
+    /**
+     * Define the API for our car component builder ourselves.
+     * Must define all methods that would be generated on their own.
+     */
+    @Component.Builder
+    interface Builder {
+        
+        /**
+         * Allows method chain call for horsepower on the builder.
+         * <p>
+         * This allows PetrolModule to be abstract and we don't have to pass anything to it.
+         * Dagger doesn't have to instantiate anything which makes the code more efficient.
+         * <p>
+         * Should prefer BindsInstance over module constructor arguments wherever possible.
+         * <p>
+         * By naming these parameters we can use multiple of the same type.
+         * Hard coding the strings is prone to typos, but we can make custom annotations instead.
+         * Won't do here but I know how to do it!!
+         *
+         * @param horsePower the horsepower we need
+         * @return the builder itself
+         */
+        @BindsInstance
+        // get variables into dependency graph at runtime
+        Builder horsePower(@Named("horse power") int horsePower);
+        
+        @BindsInstance
+        Builder engineCapacity(@Named("engine capacity") int engineCapacity);
+        
+        // Dagger will implement this method.
+        CarComponent build();
+    }
 }
