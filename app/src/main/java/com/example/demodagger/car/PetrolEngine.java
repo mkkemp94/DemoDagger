@@ -11,6 +11,7 @@ public class PetrolEngine implements Engine {
     
     private int mHorsePower;
     private int mEngineCapacity;
+    private int mCost;
     
     /**
      * The named annotation distinguishes between the two integers.
@@ -19,15 +20,18 @@ public class PetrolEngine implements Engine {
      */
     @Inject
     public PetrolEngine(@Named("horse power") int horsePower,
-                        @Named("engine capacity") int engineCapacity) {
+                        @Named("engine capacity") int engineCapacity,
+                        @Named("cost") int cost) {
         mHorsePower = horsePower;
         mEngineCapacity = engineCapacity;
+        mCost = cost;
     }
     
     @Override
     public void start() {
         Log.d(TAG, "Petrol engine started. " +
                 "\nHorsepower: " + mHorsePower +
-                "\nEngine Capacity: " + mEngineCapacity);
+                "\nEngine Capacity: " + mEngineCapacity +
+                "\nCost: " + mCost);
     }
 }
