@@ -27,11 +27,13 @@ public class DieselEngineModule {
     private int mHorsepower;
     private int mEngineCapacity;
     private int mCost;
+    private int mCarCost;
     
-    public DieselEngineModule(int horsePower, int engineCapacity, int cost) {
+    public DieselEngineModule(int horsePower, int engineCapacity, int cost, int carCost) {
         mHorsepower = horsePower;
         mEngineCapacity = engineCapacity;
         mCost = cost;
+        mCarCost = carCost;
     }
     
     /**
@@ -56,6 +58,12 @@ public class DieselEngineModule {
     @Named("cost")
     int provideCost() {
         return mCost;
+    }
+    
+    @Provides
+    @Named("car cost")
+    int provideCarCost() {
+        return mCarCost;
     }
     
     @Provides
