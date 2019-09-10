@@ -3,8 +3,6 @@ package com.example.demodagger.dagger;
 import com.example.demodagger.MainActivity;
 import com.example.demodagger.car.Car;
 
-import javax.inject.Named;
-
 import dagger.BindsInstance;
 import dagger.Subcomponent;
 
@@ -24,7 +22,7 @@ import dagger.Subcomponent;
  * and create all the necessary code.
  * <p>
  * We also need to tell the component to use our custom modules.
- * Dagger will put this module into our component
+ * Dagger will put these modules into our component
  * so that it knows where to get objects it needs from.
  */
 
@@ -33,8 +31,9 @@ import dagger.Subcomponent;
         WheelsModule.class,
         
         // Can't use both or Dagger won't know which engine to use
-                PetrolEngineModule.class,
-//        DieselEngineModule.class // Swap modules to easily test app
+        // Swap modules to easily test app
+        PetrolEngineModule.class,
+        //        DieselEngineModule.class
     
 })
 public interface ActivityComponent {
@@ -42,7 +41,7 @@ public interface ActivityComponent {
     // Create a car object
     Car createCar();
     
-    // Here's my object, please fill out its fields
+    // Here's my class, please fill out its fields
     void inject(MainActivity mainActivity);
     
     // TestCarObject createTestCarObject();
@@ -51,12 +50,10 @@ public interface ActivityComponent {
     /**
      * Define the API for our car component builder ourselves.
      * Must define all methods that would be generated on their own.
-     *
-     * // This must be nested inside a component. Can't go inside a subcomponent.
      */
     @Subcomponent.Builder
     interface Builder {
-    
+        
         /**
          * Allows method chain call for horsepower on the builder.
          * <p>
@@ -68,23 +65,18 @@ public interface ActivityComponent {
          * By naming these parameters we can use multiple of the same type.
          * Hard coding the strings is prone to typos, but we can make custom annotations instead.
          * Won't do here but I know how to do it!!
+         * <p>
+         * This gets variables into dependency graph at runtime
          *
          * @param horsePower the horsepower we need
          * @return the builder itself
          */
         @BindsInstance
-        // get variables into dependency graph at runtime
-        Builder horsePower(@Named("horse power") int horsePower);
-    
+        Builder horsePower(@QualifierHorsepower int horsePower);
+        
         @BindsInstance
-        Builder engineCapacity(@Named("engine capacity") int engineCapacity);
-    
-        @BindsInstance
-        Builder cost(@Named("cost") int cost);
-    
-        @BindsInstance
-        Builder carCost(@Named("car cost") int carCost);
-    
+        Builder engineCapacity(@QualifierEngineCapacity int engineCapacity);
+        
         // Dagger will implement this method.
         ActivityComponent build();
     }

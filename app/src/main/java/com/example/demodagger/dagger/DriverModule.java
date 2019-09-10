@@ -9,7 +9,7 @@ import dagger.Provides;
 public abstract class DriverModule {
     
     @Provides
-    @AppScope // don't have to put this...
+    @AppScope
     static Driver provideDriver() {
         return new Driver();
     }

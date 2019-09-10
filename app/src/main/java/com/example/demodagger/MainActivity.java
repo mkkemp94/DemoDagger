@@ -14,44 +14,33 @@ public class MainActivity extends AppCompatActivity {
     
     private static final String TAG = "MainActivity";
     
-    // Field injection
     @Inject public Car mCar;
-    @Inject public Car mCar2;
-    @Inject public Car mCar3;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
+        // Diesel
+        //        ActivityComponent component = ((ExampleApp) getApplication())
+        //                .getAppComponent()
+        //                .getActivityComponentBuilder(new DieselEngineModule(
+        //                        100,
+        //                        1200));
+        
+        // Petrol
         ActivityComponent component = ((ExampleApp) getApplication())
                 .getAppComponent()
                 .getActivityComponentBuilder()
                 .horsePower(150)
                 .engineCapacity(1300)
-                .cost(17000)
-                .carCost(18350)
                 .build();
         
-        //        ActivityComponent component = ((ExampleApp) getApplication())
-        //                .getAppComponent()
-        //                .getActivityComponentBuilder(new DieselEngineModule(
-        //                        100,
-        //                        1200,
-        //                        25000,
-        //                        26210));
         
-        // Field injection
         component.inject(this);
         
-        Log.d(TAG, "onCreate: First car already created using field injection.");
+        Log.d(TAG, "onCreate: First car already injected.");
         mCar.drive();
-        
-        Log.d(TAG, "onCreate: Second car already created using field injection.");
-        mCar2.drive();
-        
-        Log.d(TAG, "onCreate: Third car already created using field injection.");
-        mCar3.drive();
         
         // Constructor injection
         Log.d(TAG, "onCreate: Creating car by asking component to create it.");

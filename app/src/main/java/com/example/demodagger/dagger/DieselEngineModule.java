@@ -3,8 +3,6 @@ package com.example.demodagger.dagger;
 import com.example.demodagger.car.DieselEngine;
 import com.example.demodagger.car.Engine;
 
-import javax.inject.Named;
-
 import dagger.Module;
 import dagger.Provides;
 
@@ -26,14 +24,10 @@ public class DieselEngineModule {
      */
     private int mHorsepower;
     private int mEngineCapacity;
-    private int mCost;
-    private int mCarCost;
     
-    public DieselEngineModule(int horsePower, int engineCapacity, int cost, int carCost) {
+    public DieselEngineModule(int horsePower, int engineCapacity) {
         mHorsepower = horsePower;
         mEngineCapacity = engineCapacity;
-        mCost = cost;
-        mCarCost = carCost;
     }
     
     /**
@@ -43,27 +37,15 @@ public class DieselEngineModule {
      * so we can use them independently of each other...
      */
     @Provides
-    @Named("horse power")
+    @QualifierHorsepower
     int provideHorsePower() {
         return mHorsepower;
     }
     
     @Provides
-    @Named("engine capacity")
+    @QualifierEngineCapacity
     int provideEngineCapacity() {
         return mEngineCapacity;
-    }
-    
-    @Provides
-    @Named("cost")
-    int provideCost() {
-        return mCost;
-    }
-    
-    @Provides
-    @Named("car cost")
-    int provideCarCost() {
-        return mCarCost;
     }
     
     @Provides
@@ -71,14 +53,4 @@ public class DieselEngineModule {
         return dieselEngine;
     }
     
-    /**
-     * Better performance and more concise.
-     * Dagger never creates an instance of this class,
-     * so we can't use normal provides methods in this module.
-     *
-     * @return a new DieselEngine
-     */
-    
-    //    @Binds // doesn't support configuration
-    //    abstract Engine bindEngine(DieselEngine engine);
 }

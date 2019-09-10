@@ -2,8 +2,10 @@ package com.example.demodagger.car;
 
 import android.util.Log;
 
+import com.example.demodagger.dagger.QualifierEngineCapacity;
+import com.example.demodagger.dagger.QualifierHorsepower;
+
 import javax.inject.Inject;
-import javax.inject.Named;
 
 public class PetrolEngine implements Engine {
     
@@ -11,7 +13,6 @@ public class PetrolEngine implements Engine {
     
     private int mHorsePower;
     private int mEngineCapacity;
-    private int mCost;
     
     /**
      * The named annotation distinguishes between the two integers.
@@ -19,19 +20,16 @@ public class PetrolEngine implements Engine {
      * but this is okay for now.
      */
     @Inject
-    public PetrolEngine(@Named("horse power") int horsePower,
-                        @Named("engine capacity") int engineCapacity,
-                        @Named("cost") int cost) {
+    public PetrolEngine(@QualifierHorsepower int horsePower,
+                        @QualifierEngineCapacity int engineCapacity) {
         mHorsePower = horsePower;
         mEngineCapacity = engineCapacity;
-        mCost = cost;
     }
     
     @Override
     public void start() {
         Log.d(TAG, "Petrol engine started. " +
                 "\nHorsepower: " + mHorsePower +
-                "\nEngine Capacity: " + mEngineCapacity +
-                "\nCost: " + mCost);
+                "\nEngine Capacity: " + mEngineCapacity);
     }
 }

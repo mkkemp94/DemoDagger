@@ -20,10 +20,4 @@ public abstract class PetrolEngineModule {
     @Binds
     abstract Engine bindEngine(PetrolEngine engine);
 
-    // or
-
-    //    @Provides
-    //    static Engine provideEngine() {
-    //        return new PetrolEngine();
-    //    }
 }
