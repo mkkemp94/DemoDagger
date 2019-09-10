@@ -24,5 +24,5 @@ public interface AppComponent {
      *
      * This is called a factory method.
      */
-    ActivityComponent getActivityComponent(DieselEngineModule dieselEngineModule);
+    ActivityComponent.Builder getActivityComponentBuilder();
 }

@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.example.demodagger.car.Car;
 import com.example.demodagger.dagger.ActivityComponent;
-import com.example.demodagger.dagger.DieselEngineModule;
 
 import javax.inject.Inject;
 
@@ -25,22 +24,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        //        ActivityComponent component = DaggerActivityComponent
-        ////                .builder()
-        ////                .horsePower(150)
-        ////                .engineCapacity(1300)
-        ////                .cost(17000)
-        ////                .carCost(18350)
-        ////                .appComponent(((ExampleApp) getApplication()).getAppComponent())
-        ////                .build();
-        
         ActivityComponent component = ((ExampleApp) getApplication())
                 .getAppComponent()
-                .getActivityComponent(new DieselEngineModule(
-                        100,
-                        1200,
-                        25000,
-                        26210));
+                .getActivityComponentBuilder()
+                .horsePower(150)
+                .engineCapacity(1300)
+                .cost(17000)
+                .carCost(18350)
+                .build();
+        
+        //        ActivityComponent component = ((ExampleApp) getApplication())
+        //                .getAppComponent()
+        //                .getActivityComponentBuilder(new DieselEngineModule(
+        //                        100,
+        //                        1200,
+        //                        25000,
+        //                        26210));
         
         // Field injection
         component.inject(this);
